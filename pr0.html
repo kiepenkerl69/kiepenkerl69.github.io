@@ -1,0 +1,325 @@
+Documents/pr0/pr0.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        .login-container {
+            width: 300px;
+            margin: 100px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            text-align: left;
+            color: #F3F5F4;
+            background-color: #27292C;
+        }
+        .avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin: 10px auto;
+            display: block;
+            object-fit: cover;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            border: 0;
+            border-radius: 0px;
+            box-sizing: border-box;
+            color: #F3F5F4;
+            background-color: #1C1E1F;
+            caret-color: #ee4d2e;
+            transition: background-color 0.2s ease;
+        }
+        input:focus {
+            outline: none;
+            background-color: #2C2E2F;
+        }
+        button {
+            width: 60%;
+            padding: 10px;
+            background-color: #ee4d2e;
+            color: #F3F5F4;
+            border: none;
+            border-radius: 0;
+            cursor: pointer;
+            display: block;
+            margin: 0;
+        }
+        button:hover {
+            background-color: #ee4d2a;
+        }
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+            color: #F3F5F4;
+        }
+        .panda-container {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin: 20px auto;
+        }
+        .panda-face {
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, #B5441D 60%, #8B3415 100%);
+            border-radius: 45% 45% 40% 40%;
+            position: relative;
+            box-shadow: inset 0 -5px 15px rgba(0,0,0,0.2);
+        }
+        .panda-face::before {
+            content: '';
+            position: absolute;
+            width: 90%;
+            height: 45%;
+            background: linear-gradient(to bottom, #fff 0%, rgba(255,255,255,0.8) 100%);
+            border-radius: 50%;
+            top: 45%;
+            left: 5%;
+            opacity: 0.7;
+        }
+        .ear {
+            position: absolute;
+            width: 35px;
+            height: 45px;
+            background: linear-gradient(45deg, #B5441D, #8B3415);
+            border-radius: 50% 50% 0 0;
+            transform-origin: bottom;
+        }
+        .ear::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 35px;
+            background: linear-gradient(45deg, #fff, #f0f0f0);
+            border-radius: 50% 50% 0 0;
+            top: 5px;
+            left: 5px;
+            opacity: 0.9;
+        }
+        .ear.left {
+            left: 10px;
+            transform: rotate(-15deg);
+        }
+        .ear.right {
+            right: 10px;
+            transform: rotate(15deg);
+        }
+        .eye-patch {
+            position: absolute;
+            width: 40px;
+            height: 35px;
+            background: linear-gradient(45deg, #5C2611, #43180B);
+            border-radius: 40%;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+        }
+        .eye-patch.left {
+            left: 15px;
+            top: 35px;
+        }
+        .eye-patch.right {
+            right: 15px;
+            top: 35px;
+        }
+        .muzzle {
+            position: absolute;
+            width: 50px;
+            height: 40px;
+            background: linear-gradient(to bottom, #fff 0%, #f4f4f4 100%);
+            border-radius: 40% 40% 45% 45%;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .muzzle::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 12px;
+            background: #222;
+            border-radius: 30% 30% 50% 50%;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .eye-container {
+            position: absolute;
+            width: 80px;
+            height: 30px;
+            top: 45px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+        }
+        .eye {
+            width: 25px;
+            height: 25px;
+            background: linear-gradient(135deg, #fff 0%, #f0f0f0 50%, #e0e0e0 100%);
+            border: 2px solid #2A1208;
+            border-radius: 50%;
+            position: absolute;
+            overflow: hidden;
+        }
+        .eye.left { left: 10px; }
+        .eye.right { right: 10px; }
+        .pupil {
+            width: 12px;
+            height: 12px;
+            background: radial-gradient(circle at 30% 30%, #000 60%, #222 100%);
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 3;
+        }
+        .pupil::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #fff;
+            border-radius: 50%;
+            top: 20%;
+            left: 20%;
+            opacity: 0.8;
+        }
+        .paw {
+            width: 35px;
+            height: 40px;
+            background-color: #333;
+            border-radius: 25px 25px 35px 35px;
+            position: absolute;
+            bottom: -50px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            z-index: 10;
+        }
+        .paw::before {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 12px;
+            background-color: #333;
+            border-radius: 50%;
+            top: -4px;
+        }
+        .paw::after {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 12px;
+            background-color: #333;
+            border-radius: 50%;
+            top: -4px;
+        }
+        .paw.left {
+            left: 22px;
+            transform: rotate(-30deg);
+        }
+        .paw.right {
+            right: 22px;
+            transform: rotate(30deg);
+        }
+        .paw.left::before { left: 4px; }
+        .paw.left::after { right: 4px; }
+        .paw.right::before { left: 4px; }
+        .paw.right::after { right: 4px; }
+        .password-focus .paw {
+            bottom: 45px; /* Move up to cover eyes */
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Anmelden</h2>
+        <div class="panda-container">
+            <div class="panda-face">
+                <div class="ear left"></div>
+                <div class="ear right"></div>
+                <div class="eye-patch left"></div>
+                <div class="eye-patch right"></div>
+                <div class="muzzle"></div>
+                <div class="eye-container">
+                    <div class="eye left">
+                        <div class="pupil"></div>
+                    </div>
+                    <div class="eye right">
+                        <div class="pupil"></div>
+                    </div>
+                </div>
+                <div class="paw left"></div>
+                <div class="paw right"></div>
+            </div>
+        </div>
+        <form action="#" method="POST">
+            <div class="form-group">
+                <label for="username">Benutzername:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Passwort:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit">Anmelden</button>
+        </form>
+    </div>
+
+    <script>
+        const pupils = document.querySelectorAll('.pupil');
+        const pandaFace = document.querySelector('.panda-face');
+        const usernameInput = document.querySelector('#username');
+        const passwordInput = document.querySelector('#password');
+    
+        function updateEyes(input) {
+        const start = input.selectionStart;
+        const maxLength = 20;
+        const position = Math.min(start / maxLength, 1);
+        
+        // Calculate circular path
+        const angle = position * Math.PI; // Convert position to radians
+        const radius = 5; // Radius of movement in pixels
+        
+        pupils.forEach(pupil => {
+            // Calculate x and y coordinates on circular path
+            const x = -0.6*Math.cos(angle) * radius;
+            const y = 0.8*Math.sin(angle) * radius + 2; // Add 2px offset to stay in lower half
+            
+            pupil.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
+        });
+    }
+        
+        usernameInput.addEventListener('input', (e) => {
+            updateEyes(e.target);
+        });
+    
+        usernameInput.addEventListener('click', (e) => {
+            updateEyes(e.target);
+        });
+    
+        usernameInput.addEventListener('keyup', (e) => {
+            updateEyes(e.target);
+        });
+    
+        passwordInput.addEventListener('focus', () => {
+            pandaFace.classList.add('password-focus');
+        });
+    
+        passwordInput.addEventListener('blur', () => {
+            pandaFace.classList.remove('password-focus');
+        });
+    </script>
+</body>
+</html>
